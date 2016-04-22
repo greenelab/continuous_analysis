@@ -19,10 +19,9 @@ build:
 
   post_ci:
     - docker build -t brettbj/continuous_analysis .
-    - docker login
     - docker push brettbj/continuous_analysis:latest
 
-  integrations:
+integrations:
   hub:
     - integrationName: brettbj/continuous_analysis
       type: docker
