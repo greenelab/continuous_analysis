@@ -120,10 +120,11 @@ publish:
 sudo docker pull drone/drone:0.4
 ~~~
 
-3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the authorization callback followed by /api/auth/github.com
+3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the homepage URL and the authorization callback followed by /api/auth/github.com
 
 ~~~
-http://YOUR-IP-HERE/api/auth/github.com
+Homepage URL: http://YOUR-IP-HERE/
+Callback URL: http://YOUR-IP-HERE/api/auth/github.com
 ~~~
 
 4.) Create a configuration file at (etc/drone/dronerc), filling in the client 
@@ -151,7 +152,20 @@ sudo docker run \
 
 ### Example 4 - Private Cloud CI service - Digital Ocean
 
+DigitalOcean provides an extremely easy way to start a cloud-based private continuous integration service. Instructions below were adapted from [here](https://www.digitalocean.com/community/tutorials/how-to-use-the-drone-one-click-application-image).
 
+1.) Create a drone droplet, selecting Drone on Ubuntu 14.04 from the applications tab.
+
+2.)  Create a new application at - https://github.com/settings/developers - with your hosts ip address in the homepage URL and the authorization callback followed by /api/auth/github.com
+
+~~~
+Homepage URL: http://YOUR-IP-HERE/
+Callback URL: http://YOUR-IP-HERE/api/auth/github.com
+~~~
+
+3.) Take note of the Client ID and Client Secret and log into your new droplet via ssh. You'll be asked a few questions, for simplest configuration choose automatic configuration. You'll be prompted to choose your code repository and enter your Client ID and Client secret.
+
+4.) You're ready to start by going to: http://YOUR-IP-HERE/login
 
 ### Example 5 - Private Cloud CI service - AWS
 
