@@ -19,9 +19,9 @@ build:
 
   post_ci:
     - docker build -t brettbj/continuous_analysis .
-    - docker push brettbj/daps:latest
+    - docker push brettbj/continuous_analysis:latest
 
   integrations:
   hub:
-    - integrationName: brettbj/daps
+    - integrationName: brettbj/continuous_analysis
       type: docker

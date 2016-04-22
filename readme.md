@@ -18,9 +18,46 @@ Setup Instructions
 
 Shippable is the only example shown that does not rely on the [open source drone project](https://github.com/drone/drone)
 
+1. Sign in to [Shippable](https://app.shippable.com/) using Github
+2. Select the account owner for your repository in the Subscriptions dropdown, click the enable project button for the desired project.
+3. Add a shippable.yml file to the root of your repository
 
 
-### Example 2 - Full service - Drone.io
+* First pull in your base docker image
+	
+~~~yaml
+pre_ci_boot:
+      image_name: brettbj/continuous_analysis_base
+      image_tag: latest
+      pull: true
+      options: "-e HOME=/root" 
+~~~
+
+
+* Then run any unit tests and/or integration tests you have
+
+~~~yaml
+ci:
+    - cd /root/src/github.com/greenelab/continuous_analysis
+    - nose2 --plugin nose2.plugins.junitxml --junit-xml test 
+    - mv nose2-junit.xml shippable/testresults/tests.xml
+    - coverage run --branch test.py
+    - coverage xml -o shippable/codecoverage/coverage.xml test.py
+~~~
+
+4. To push a docker image containing the completed results enable an integration with dockerhub. From your project page in shippable, go to the settings tab. In the hub integration dropdown, choose create integration and follow the instructions.
+
+* Add code resembling the following to your shippable.yml file:
+
+~~~yaml
+post_ci:
+    - docker build -t brettbj/continuous_analysis .
+    - docker push brettbj/daps:latest
+~~~
+
+
+
+### Example 2 - Full service - Drone.io (waiting on docker support)
 
 
 
