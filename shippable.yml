@@ -11,7 +11,7 @@ build:
       options: "-e HOME=/root"
 
   ci:
-    - cd /root/src/github.com/greenelab/DAPS
+    - cd /root/src/github.com/greenelab/continuous_analysis
     - nose2 --plugin nose2.plugins.junitxml --junit-xml test 
     - mv nose2-junit.xml shippable/testresults/tests.xml
     - coverage run --branch test.py
