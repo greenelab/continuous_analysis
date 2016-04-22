@@ -1,0 +1,12 @@
+box: brettbj/continuous_analysis_base
+build:
+  steps:
+    - script:
+        name: echo python information
+        code: |
+          cd /root/src/github.com/greenelab/continuous_analysis
+          nose2 --plugin nose2.plugins.junitxml --junit-xml test 
+          mkdir wercker
+          mv nose2-junit.xml wercker/tests.xml
+          coverage run --branch test.py
+          coverage xml -o wercker/coverage.xml test.py
