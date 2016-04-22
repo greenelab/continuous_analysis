@@ -4,7 +4,7 @@ We consider 3 configurations of continuous analysis:
 
 1. Using a full service continuous integration service.
 	* 	Shippable ([Shippable](https://app.shippable.com/) is shown but many other CI services are docker compatible including [Codeship](https://codeship.com/), [Travis CI](https://travis-ci.org/), [Wercker](http://wercker.com/), [CircleCI](https://circleci.com/) and several others)
-	* 	Drone.io	
+	* 	Hosted Drone.io (waiting on docker support)	
 2. Installing a personal local continuous integration service.
 3. Provisioning a personal continuous integration service in the cloud.
 	* [Digital Ocean](https://www.digitalocean.com/)

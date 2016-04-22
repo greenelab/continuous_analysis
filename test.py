@@ -9,7 +9,7 @@ class SimpleTest(unittest.TestCase):
 		self.assertTrue(ss.add(2, 2) == 4)
 
 	def testSubtract(self):
-		self.assertTrue(ss.sub(2, 1) == 1)
+		self.assertTrue(ss.subtract(2, 1) == 1)
 
 	def testMultiply(self):
 		self.assertTrue(ss.multiply(2, 3) == 6)
