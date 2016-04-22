@@ -1,0 +1,27 @@
+language: python
+notifications:
+   email: false
+archive: true
+
+build:
+  pre_ci_boot:
+      image_name: brettbj/continuous_analysis_base
+      image_tag: latest
+      pull: true
+      options: "-e HOME=/root"
+
+  ci:
+    - cd /root/src/github.com/greenelab/DAPS
+    - nose2 --plugin nose2.plugins.junitxml --junit-xml test 
+    - mv nose2-junit.xml shippable/testresults/tests.xml
+    - coverage run --branch test.py
+    - coverage xml -o shippable/codecoverage/coverage.xml test.py
+
+  post_ci:
+    - docker build -t brettbj/continuous_analysis .
+    - docker push brettbj/daps:latest
+
+  integrations:
+  hub:
+    - integrationName: brettbj/daps
+      type: docker
