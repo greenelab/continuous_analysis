@@ -3,8 +3,10 @@
 We consider 3 configurations of continuous analysis:
 
 1. Using a full service continuous integration service.
-	* 	Shippable ([Shippable](https://app.shippable.com/) is shown but many other CI services are docker compatible including [Codeship](https://codeship.com/), [Travis CI](https://travis-ci.org/), [Wercker](http://wercker.com/), [CircleCI](https://circleci.com/) and several others)
-	* 	Hosted Drone.io (waiting on docker support)	
+	*  Shippable ([Shippable](https://app.shippable.com/))
+	*  wercker ([wercker](http://wercker.com/))
+	*  Many other CI services are docker compatible including [Codeship](https://codeship.com/), [Travis CI](https://travis-ci.org/), [CircleCI](https://circleci.com/) and several others)
+	
 2. Installing a personal local continuous integration service.
 3. Provisioning a personal continuous integration service in the cloud.
 	* [Digital Ocean](https://www.digitalocean.com/)
@@ -12,7 +14,6 @@ We consider 3 configurations of continuous analysis:
 	* [Google Cloud Platform](https://cloud.google.com/)
 	* [Kubernetes on Google Cloud Platform](http://kubernetes.io/)Using a full service continuous integration service requires the least set up time but cannot handle computational intensive work. Local continuous integration can be used at no cost, and configured to take advantage of institutional clusters or GPU computing. Continuous integration in the cloud offers elastic computing resources with the ability to scale up or down depending on the computational complexity of your work.
 
-Setup Instructions
 
 ### Example 1 - Full service - Shippable
 
@@ -45,6 +46,8 @@ ci:
     - coverage xml -o shippable/codecoverage/coverage.xml test.py
 ~~~
 
+* If that passes, re-run your analysis - @TODO
+
 4.) To push a docker image containing the completed results enable an integration with dockerhub. From your project page in shippable, go to the settings tab. In the hub integration dropdown, choose create integration and follow the instructions.
 
 * Add code resembling the following to your shippable.yml file:
@@ -57,13 +60,98 @@ post_ci:
 
 
 
-### Example 2 - Full service - Drone.io (waiting on docker support)
+### Example 2 - Full service - wercker
 
+* Pull in docker image
+
+~~~yaml
+box: brettbj/continuous_analysis_base
+~~~
+
+* Run any unit tests or integration tests you have
+
+~~~yaml
+build:
+  steps:
+    - script:
+        name: Run Tests + Coverage
+        code: |
+          nose2 --plugin nose2.plugins.junitxml --junit-xml test 
+          mkdir wercker
+          mv nose2-junit.xml wercker/tests.xml
+          coverage run --branch test.py
+          coverage xml -o wercker/coverage.xml test.py
+~~~
+
+* Run analysis
+@TODO
+
+* Push results to github
+@TODO
+
+
+### .drone.yml Example Configuration
+
+Each of the remaining examples uses a common .drone.yml format. 
+
+~~~
+# choose the base docker image
+image: brettbj/continuous_analysis_base
+script:
+	# run tests
+	# perform analysis
+
+# publish results
+publish:
+	docker:
+		# docker details
+~~~
 
 
 ### Example 3 - Local/Private Cluster CI service
 
+[Drone](https://github.com/drone/drone) is a CI platform built on container technology. It can be used to easily run a local or private cluster based CI service. Instructions adapted from - [http://readme.drone.io/setup/overview/](http://readme.drone.io/setup/overview/)
+
+1.) Install Docker on host machine - [Linux](https://docs.docker.com/linux/), [Mac](https://docs.docker.com/mac/), [Windows](https://docs.docker.com/windows/)
+
+2.) Pull the drone image via docker
+
+~~~
+sudo docker pull drone/drone:0.4
+~~~
+
+3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the authorization callback followed by /api/auth/github.com
+
+~~~
+http://YOUR-IP-HERE/api/auth/github.com
+~~~
+
+4.) Create a configuration file at (etc/drone/dronerc), filling in the client 
+
+~~~
+REMOTE_DRIVER=github
+REMOTE_CONFIG=https://github.com?client_id=....&client_secret=....
+~~~
+
+5.) Create and run your drone container 
+
+~~~
+sudo docker run \
+	--volume /var/lib/drone:/var/lib/drone \
+	--volume /var/run/docker.sock:/var/run/docker.sock \
+	--env-file /etc/drone/dronerc \
+	--restart=always \
+	--publish=80:8000 \
+	--detach=true \
+	--name=drone \
+	drone/drone:0.4
+~~~
+
+6.) Access the drone control panel - your-ip-address/login and press the github button. 
+
 ### Example 4 - Private Cloud CI service - Digital Ocean
+
+
 
 ### Example 5 - Private Cloud CI service - AWS
 
