@@ -2,10 +2,11 @@ image: brettbj/continuous_analysis_base
 script:
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
   - mkdir drone
+  - nose2 --plugin nose2.plugins.junitxml --junit-xml test
   - mv nose2-junit.xml drone/tests.xml
   - coverage run --branch test.py
   - coverage xml -o drone/coverage.xml test.py
-  
+
 # commented out - because this is already done in shippable builds
 # publish:
 #   docker:
