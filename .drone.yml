@@ -6,6 +6,10 @@ script:
   - mv nose2-junit.xml drone/tests.xml
   - coverage run --branch test.py
   - coverage xml -o drone/coverage.xml test.py
+  - cd ~/kallisto/test/
+  - ../build/src/kallisto index -i transcripts.idx transcripts.fasta.gz
+  - ../build/src/kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
+  - mv output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
 
 # commented out - because this is already done in shippable builds
 # publish:
