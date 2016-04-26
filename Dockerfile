@@ -24,11 +24,9 @@ RUN pip3 install jupyter
 RUN pip3 install nose2
 RUN pip3 install coverage
 
-RUN cd ~
 RUN git clone https://github.com/pachterlab/kallisto.git
-RUN cd kallisto
-mkdir build
-cd build
-cmake ..
-make
-make install
+RUN mkdir /kallisto/build
+RUN cd /kallisto/build
+RUN pwd
+RUN cmake ./kallisto
+RUN make ./kallisto

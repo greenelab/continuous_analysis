@@ -2,6 +2,9 @@
 
 This repository shows examples of how to perform continuous analysis using a variety of services and open source software. If you'd like to see a service added please create an issue or better yet, implement it and create a pull request.
 
+This repository uses [Kallisto](https://github.com/pachterlab/kallisto) as an example. 
+
+
 We consider 3 configurations of continuous analysis:
 
 1. Using a full service continuous integration service.
