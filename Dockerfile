@@ -14,9 +14,21 @@ RUN apt-get update && apt-get install -y \
  python3-dev \
  python3-pip \
  python3-numpy \
- python3-scipy
+ python3-scipy \
+ cmake \
+ zlib1g-dev \
+ libhdf5-dev
 
 RUN pip3 install seaborn
 RUN pip3 install jupyter
 RUN pip3 install nose2
 RUN pip3 install coverage
+
+RUN cd ~
+RUN git clone https://github.com/pachterlab/kallisto.git
+RUN cd kallisto
+mkdir build
+cd build
+cmake ..
+make
+make install
