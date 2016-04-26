@@ -1,5 +1,7 @@
 # Continuous Analysis
 
+This repository shows examples of how to perform continuous analysis using a variety of services and open source software. If you'd like to see a service added please create an issue or better yet, implement it and create a pull request.
+
 We consider 3 configurations of continuous analysis:
 
 1. Using a full service continuous integration service.
@@ -120,11 +122,11 @@ publish:
 sudo docker pull drone/drone:0.4
 ~~~
 
-3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the homepage URL and the authorization callback followed by /api/auth/github.com
+3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the homepage URL and the authorization callback followed by /authorize/
 
 ~~~
 Homepage URL: http://YOUR-IP-HERE/
-Callback URL: http://YOUR-IP-HERE/api/auth/github.com
+Callback URL: http://YOUR-IP-HERE/autorize/
 ~~~
 
 4.) Create a configuration file at (etc/drone/dronerc), filling in the client 
@@ -169,6 +171,84 @@ Callback URL: http://YOUR-IP-HERE/api/auth/github.com
 
 ### Example 5 - Private Cloud CI service - AWS
 
+Instructions adapted from [here](http://tleyden.github.io/blog/2016/02/15/setting-up-a-self-hosted-drone-dot-io-ci-server/).
+
+1.) Log into the AWS and launch an Ubuntu image based off the Amazon provided AMI (ami-9abea4fb). 
+
+2.) SSH into the created instance - 
+
+~~~
+ssh ubuntu@<aws-instance>
+~~~
+
+3.) [Install Docker](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
+
+4.) Create a new application at - https://github.com/settings/developers - with the ec2 application url in the homepage URL and the authorization callback followed by /authorize/
+
+~~~
+Homepage URL: http://YOUR-IP-HERE/
+Callback URL: http://YOUR-IP-HERE/authorize/
+~~~
+
+5.) Create a configuration file at (/etc/drone/dronerc), filling in the client info - 
+
+~~~
+REMOTE_DRIVER=github
+REMOTE_CONFIG=https://github.com?client_id=....&client_secret=....
+~~~
+
+6.) Run the Drone Docker container 
+
+~~~
+sudo docker run \
+	--volume /var/lib/drone:/var/lib/drone \
+	--volume /var/run/docker.sock:/var/run/docker.sock \
+	--env-file /etc/drone/dronerc \
+	--restart=always \
+	--publish=80:8000 \
+	--detach=true \
+	--name=drone \
+	drone/drone:0.4
+~~~
+
+7.) Adjust your EC2 AWS Security settings to allow 
+inbound visitors. Do this by going to the instance details for your EC2 instance and clicking on the security group. Choose the inbound tab, edit and add a listener on port 80, with source 0.0.0.0.
+
+8.) Go to your EC2 instances adddress and you should now be able to log in.
+
+
 ### Example 6 - Private Cloud CI service - Google 
 
-### Example 7 - Private Cloud CI service - Google Kubernetes
+1.) Log into google cloud platform, and create a new VM instance under compute engine. 
+
+2.) SSH into the new vm instance (this can be done via the browser)
+
+3.) [Install Docker](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
+
+4.) Create a new application at - https://github.com/settings/developers - with the ec2 application url in the homepage URL and the authorization callback followed by /authorize/
+
+~~~
+Homepage URL: http://YOUR-IP-HERE/
+Callback URL: http://YOUR-IP-HERE/authorize/
+~~~
+
+5.) Create a configuration file at (/etc/drone/dronerc), filling int he client info - 
+
+~~~
+REMOTE_DRIVER=github
+REMOTE_CONFIG=https://github.com?client_id=....&client_secret=....
+~~~
+
+6.) Run the Drone Docker container 
+
+~~~
+sudo docker run \
+	--volume /var/lib/drone:/var/lib/drone \
+	--volume /var/run/docker.sock:/var/run/docker.sock \
+	--env-file /etc/drone/dronerc \
+	--restart=always \
+	--publish=80:8000 \
+	--detach=true \
+	--name=drone \
+	drone/drone:0.4
+~~~
