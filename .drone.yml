@@ -16,19 +16,13 @@ script:
   - git config user.email "brettbj@gmail.com"
   - git config user.name "Brett Beaulieu-Jones"
   - git config --global push.default simple
-  - git remote set-url origin git@github.com:greenelab/continuous_analysis.git
+  - git remote set-url origin https://brettbj:$$git_publish_key@github.com/greenelab/continuous_analysis.git
   
   - git checkout master
   - git add drone/*
   - git commit drone/* -m "Drone output [CI SKIP] [SKIP CI] ."
   - git stash
   - git push
-
-deploy:
-  git_push:
-    branch: master
-    remote: git@github.com:greenelab/continuous_analysis.git
-    force: false
 
 # commented out - because this is already done in shippable builds
 # publish:
