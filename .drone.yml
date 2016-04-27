@@ -1,4 +1,4 @@
-image: brettbj/continuous_analysis_base
+image: brettbj/continuous_analysis_base:latest
 script:
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
   - mkdir drone
