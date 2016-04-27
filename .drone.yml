@@ -11,14 +11,18 @@ script:
   - kallisto index -i transcripts.idx transcripts.fasta.gz
   - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
   - mv /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
-
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
+  
+  - git add drone/*
+  - git commit drone/* -m "Drone output"
+  - git stash
+  - git push
 
 publish:
-  github_release:
-    api_key: f77251be7c7df74a48e2
-    files: drone/*
-    checksum: sha1
+  git_push:
+    branch: master
+    remote: git@github.com:greenelab/continuous_analysis.git
+    force: false
 
 # commented out - because this is already done in shippable builds
 # publish:
