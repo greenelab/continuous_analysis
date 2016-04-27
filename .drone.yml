@@ -20,7 +20,7 @@ script:
   
   - git checkout master
   - git add drone/*
-  - git commit drone/* -m "Drone output"
+  - git commit drone/* -m "Drone output [CI SKIP] [SKIP CI] ."
   - git stash
   - git push
 
