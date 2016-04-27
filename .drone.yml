@@ -13,6 +13,12 @@ script:
   - mv /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
   
+  - git config user.email "brettbj@gmail.com"
+  - git config user.name "Brett Beaulieu-Jones"
+  - git config --global push.default simple
+  - git remote set-url origin git@github.com:greenelab/continuous_analysis.git
+  
+  - git checkout master
   - git add drone/*
   - git commit drone/* -m "Drone output"
   - git stash
