@@ -31,8 +31,3 @@ RUN cd kallisto/build && \
 	cmake .. && \
 	make && \
 	make install
-
-RUN git config user.email "brettbj@gmail.com" && \
-	git config user.name "Brett Beaulieu-Jones" && \
-	git config --global push.default simple && \
-	git remote set-url origin git@github.com:greenelab/DAPS.git
