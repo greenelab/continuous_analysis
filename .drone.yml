@@ -9,7 +9,7 @@ script:
 
   - cd /kallisto/test
   - pwd 
-  - cd /kallisto/build/src
+  - cd /kallisto/build/
   - ls
   - /kallisto/build/src/kallisto index -i transcripts.idx transcripts.fasta.gz
   - /kallisto/build/src/kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
