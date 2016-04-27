@@ -7,7 +7,6 @@ script:
   - coverage run --branch test.py
   - coverage xml -o drone/coverage.xml test.py
 
-  - kallisto
   - cd /kallisto/test
   - kallisto index -i transcripts.idx transcripts.fasta.gz
   - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
