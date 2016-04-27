@@ -26,7 +26,7 @@ RUN pip3 install coverage
 
 RUN git clone https://github.com/pachterlab/kallisto.git
 RUN mkdir /kallisto/build
-RUN cd /kallisto/build
-RUN pwd
-RUN cmake ./kallisto
-RUN make ./kallisto
+RUN cd kallisto/build && \
+	cmake .. && \
+	make && \
+	make install
