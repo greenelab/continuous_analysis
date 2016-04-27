@@ -7,6 +7,7 @@ script:
   - coverage run --branch test.py
   - coverage xml -o drone/coverage.xml test.py
 
+  - cd /kallisto/test
   - /kallisto/build/src/kallisto index -i transcripts.idx transcripts.fasta.gz
   - /kallisto/build/src/kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
   - mv /kallisto/build/src/kalllisto/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
