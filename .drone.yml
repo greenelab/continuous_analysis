@@ -19,6 +19,7 @@ script:
   - git config --global push.default simple
   - git remote set-url origin git@github.com:greenelab/continuous_analysis.git
   
+  - git checkout master
   - git add drone/*
   - git commit drone/* -m "Drone output"
   - git stash
