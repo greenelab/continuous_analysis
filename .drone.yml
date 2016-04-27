@@ -8,14 +8,9 @@ script:
   - coverage xml -o drone/coverage.xml test.py
 
   - cd /kallisto/test
-  - pwd 
-  - cd /kallisto/build/
-  - pwd
-  - cd src
-  - pwd
-  - /kallisto/build/src/kallisto index -i transcripts.idx transcripts.fasta.gz
-  - /kallisto/build/src/kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
-  - mv /kallisto/build/src/kalllisto/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
+  - kallisto index -i transcripts.idx transcripts.fasta.gz
+  - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
+  - mv /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
 
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
   - git add drone/*
