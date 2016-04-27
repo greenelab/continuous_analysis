@@ -3,6 +3,7 @@
 FROM ubuntu:14.04
 MAINTAINER Brett Beaulieu-Jones <brettbe@med.upenn.edu>
 
+# install python depencies for plotting
 RUN apt-get update && apt-get install -y \
  build-essential \
  git \
@@ -19,10 +20,10 @@ RUN apt-get update && apt-get install -y \
  zlib1g-dev \
  libhdf5-dev
 
-RUN pip3 install seaborn
-RUN pip3 install jupyter
-RUN pip3 install nose2
-RUN pip3 install coverage
+RUN pip3 install seaborn && \
+	pip3 install jupyter && \
+	pip3 install nose2 && \
+	pip3 install coverage 
 
 RUN git clone https://github.com/pachterlab/kallisto.git
 RUN mkdir /kallisto/build
@@ -30,3 +31,8 @@ RUN cd kallisto/build && \
 	cmake .. && \
 	make && \
 	make install
+
+RUN git config user.email "brettbj@gmail.com" && \
+	git config user.name "Brett Beaulieu-Jones" && \
+	git config --global push.default simple && \
+	git remote set-url origin git@github.com:greenelab/DAPS.git && \
