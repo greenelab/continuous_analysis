@@ -22,9 +22,8 @@ script:
   - git add drone/*
   - git commit drone/* -m "Drone output"
   - git stash
-  - git push
 
-publish:
+deploy:
   git_push:
     branch: master
     remote: git@github.com:greenelab/continuous_analysis.git
