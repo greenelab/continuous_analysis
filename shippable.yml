@@ -22,8 +22,8 @@ build:
     - kallisto index -i transcripts.idx transcripts.fasta.gz
     - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
     - cp -R /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis
-    
-    -  # plot the results from a jupyter notebook
+
+    # plot the results from a jupyter notebook
     - cd /root/src/github.com/greenelab/continuous_analysis
     - jupyter nbconvert --to html --execute ./Plotting.ipynb
 

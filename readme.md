@@ -5,8 +5,7 @@ This repository shows examples of how to perform continuous analysis using a var
 This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit.
 
 <img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig1.png?raw=true" alt="Drawing" style="width: 600px;"/>
-<img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig2.png?raw=true" alt="Drawing" style="width: 300px;"/>
-<img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig3.png?raw=true" alt="Drawing" style="width: 300px;"/>
+<img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig2.png?raw=true" alt="Drawing" style="width: 300px;"/><img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig3.png?raw=true" alt="Drawing" style="width: 300px;"/>
 
 We consider 3 configurations of continuous analysis:
 
