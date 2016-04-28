@@ -2,7 +2,11 @@
 
 This repository shows examples of how to perform continuous analysis using a variety of services and open source software. If you'd like to see a service added please create an issue or better yet, implement it and create a pull request.
 
-This repository uses [Kallisto](https://github.com/pachterlab/kallisto) as an example. 
+This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit.
+
+![](https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig1.png?raw=true)
+![](https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig2.png?raw=true)
+![](https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig4.png?raw=true)
 
 
 We consider 3 configurations of continuous analysis:
