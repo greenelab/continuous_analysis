@@ -35,7 +35,7 @@ build:
 
     - git checkout master
     - git add shippable/.
-    - git commit shippable/* -m "Shippable output [CI SKIP] [SKIP CI] ."
+    - git commit -a -m "Shippable output [CI SKIP] [SKIP CI] ."
     - git stash
     - git push
 
