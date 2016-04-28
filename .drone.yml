@@ -11,7 +11,7 @@ script:
   - cd /kallisto/test
   - kallisto index -i transcripts.idx transcripts.fasta.gz
   - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
-  - cp /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
+  - cp -R /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
   
   # plot the results from a jupyter notebook
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
