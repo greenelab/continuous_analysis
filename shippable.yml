@@ -21,12 +21,11 @@ build:
     - cd /kallisto/test
     - kallisto index -i transcripts.idx transcripts.fasta.gz
     - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
-    - cp -R /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis
+    - cp -R /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis/shippable/output
 
     # plot the results from a jupyter notebook
     - cd /root/src/github.com/greenelab/continuous_analysis
     - jupyter nbconvert --to html --execute ./Shippable_Plotting.ipynb
-    - mv /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis/shippable/output
 
     # push the results back to github
     - git config user.email "brettbj@gmail.com"
