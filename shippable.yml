@@ -16,9 +16,29 @@ build:
     - mv nose2-junit.xml shippable/testresults/tests.xml
     - coverage run --branch test.py
     - coverage xml -o shippable/codecoverage/coverage.xml test.py
+
+    # run kallisto on a few simple tests
     - cd /kallisto/test
     - kallisto index -i transcripts.idx transcripts.fasta.gz
     - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
+    - cp -R /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis
+    
+    -  # plot the results from a jupyter notebook
+    - cd /root/src/github.com/greenelab/continuous_analysis
+    - jupyter nbconvert --to html --execute ./Plotting.ipynb
+
+    # push the results back to github
+    - git config user.email "brettbj@gmail.com"
+    - git config user.name "Brett Beaulieu-Jones"
+    - git config --global push.default simple
+    - git remote set-url origin https://brettbj:$$git_publish_key@github.com/greenelab/continuous_analysis.git
+
+    - git checkout master
+    - git add shippable/*
+    - git commit shippable/* -m "Shippable output [CI SKIP] [SKIP CI] ."
+    - git stash
+    - git push
+
     - mv /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
 
   post_ci:
