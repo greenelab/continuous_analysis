@@ -1,6 +1,8 @@
 # Continuous Analysis
 
-This repository shows examples of how to perform continuous analysis using a variety of services and open source software. If you'd like to see a service added please create an issue or better yet, implement it and create a pull request.
+This repository shows examples of how to perform continuous analysis using a variety of services and open source software. 
+
+We encourage additions and improvements, please create an issue or better yet, implement it and create a pull request.
 
 This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit.
 
@@ -18,8 +20,7 @@ We consider 3 configurations of continuous analysis:
 3. Provisioning a personal continuous integration service in the cloud.
 	* [Digital Ocean](https://www.digitalocean.com/)
 	* [Amazon Web Services](http://aws.amazon.com/)
-	* [Google Cloud Platform](https://cloud.google.com/)
-	* [Kubernetes on Google Cloud Platform](http://kubernetes.io/)Using a full service continuous integration service requires the least set up time but cannot handle computational intensive work. Local continuous integration can be used at no cost, and configured to take advantage of institutional clusters or GPU computing. Continuous integration in the cloud offers elastic computing resources with the ability to scale up or down depending on the computational complexity of your work.
+	* [Google Cloud Platform](https://cloud.google.com/)Using a full service continuous integration service requires the least set up time but cannot handle computational intensive work. Local continuous integration can be used at no cost, and configured to take advantage of institutional clusters or GPU computing. Continuous integration in the cloud offers elastic computing resources with the ability to scale up or down depending on the computational complexity of your work.
 
 
 ### Example 1 - Full service - Shippable
@@ -53,11 +54,40 @@ ci:
     - coverage xml -o shippable/codecoverage/coverage.xml test.py
 ~~~
 
-* If that passes, re-run your analysis - @TODO
+* If that passes, re-run your analysis
 
-4.) To push a docker image containing the completed results enable an integration with dockerhub. From your project page in shippable, go to the settings tab. In the hub integration dropdown, choose create integration and follow the instructions.
+~~~yaml
+	# run kallisto on a few simple tests
+    - cd /kallisto/test
+    - kallisto index -i transcripts.idx transcripts.fasta.gz
+    - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
+    - cp -R /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis/shippable/output
 
-* Add code resembling the following to your shippable.yml file:
+    # plot the results from a jupyter notebook
+    - cd /root/src/github.com/greenelab/continuous_analysis
+    - jupyter nbconvert --to html --execute ./Shippable_Plotting.ipynb
+~~~
+
+
+4.) Push completed Results - 
+
+* Push results back to github (create a variable $git_publish_key holding a git deploy key to perform this) -
+
+~~~yaml
+	- git config user.email "brettbj@gmail.com"
+    - git config user.name "Brett Beaulieu-Jones"
+    - git config --global push.default simple
+    - git remote set-url origin https://brettbj:$git_publish_key@github.com/greenelab/continuous_analysis.git
+
+    - git checkout master
+    - git pull
+    - git add shippable/.
+    - git commit -a -m "Shippable output [CI SKIP] [SKIP CI] ."
+    - git stash
+    - git push
+~~~
+
+* To push a docker image containing the completed results enable an integration with dockerhub. From your project page in shippable, go to the settings tab. In the hub integration dropdown, choose create integration and follow the instructions. Add code resembling the following to your shippable.yml file:
 
 ~~~yaml
 post_ci:
@@ -91,15 +121,50 @@ build:
 ~~~
 
 * Run analysis
-@TODO
+
+~~~yaml
+	- script:
+        name: Run Kallisto
+        code: |
+          cd /kallisto/test
+          kallisto index -i transcripts.idx transcripts.fasta.gz &>-
+          kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz &>-
+          cp -R /kallisto/test/output /pipeline/source/wercker/output
+~~~
+
+* Plot figures
+
+~~~yaml
+	- script:
+        name: Plot Results
+        code: |
+          cd /pipeline/source
+          jupyter nbconvert --to html --execute ./Wercker_Plotting.ipynb
+~~~
 
 * Push results to github
-@TODO
+
+~~~yaml
+	- script:
+        name: Push Results back to github
+        code: |
+          git config user.email "brettbj@gmail.com"
+          git config user.name "Brett Beaulieu-Jones"
+          git config --global push.default simple
+          git remote set-url origin https://brettbj:$git_publish_key@github.com/greenelab/continuous_analysis.git
+
+          git checkout master
+          git pull
+          git add wercker/.
+          git commit -a -m "Wercker output [CI SKIP] [SKIP CI] ."
+          git stash
+          git push
+~~~
 
 
 ### .drone.yml Example Configuration
 
-Each of the remaining examples uses a common .drone.yml format. 
+Each of the remaining examples uses a common .drone.yml format. See [here](https://github.com/greenelab/continuous_analysis/blob/master/.drone.yml) for full details
 
 ~~~
 # choose the base docker image

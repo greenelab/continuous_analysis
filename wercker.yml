@@ -35,6 +35,6 @@ build:
           git checkout master
           git pull
           git add wercker/.
-          git commit -a -m "Shippable output [CI SKIP] [SKIP CI] ."
+          git commit -a -m "Wercker output [CI SKIP] [SKIP CI] ."
           git stash
           git push
