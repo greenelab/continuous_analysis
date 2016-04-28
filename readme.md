@@ -229,7 +229,7 @@ inbound visitors. Do this by going to the instance details for your EC2 instance
 3.) [Install Docker](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
 
 4.) Create a new application at - https://github.com/settings/developers - with the compute engine instance ip in the homepage URL and the authorization callback followed by /authorize/
-I
+
 ~~~
 Homepage URL: http://YOUR-IP-HERE/
 Callback URL: http://YOUR-IP-HERE/authorize/

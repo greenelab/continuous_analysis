@@ -7,12 +7,17 @@ script:
   - coverage run --branch test.py
   - coverage xml -o drone/coverage.xml test.py
 
+  # run kallisto on a few simple tests
   - cd /kallisto/test
   - kallisto index -i transcripts.idx transcripts.fasta.gz
   - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
-  - mv /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
-  - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
+  - cp /kallisto/test/output /var/cache/drone/src/github.com/greenelab/continuous_analysis/drone/output
   
+  # plot the results from a jupyter notebook
+  - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
+  - jupyter nbconvert --to html --execute ./Plotting.ipynb
+
+  # push the results back to github
   - git config user.email "brettbj@gmail.com"
   - git config user.name "Brett Beaulieu-Jones"
   - git config --global push.default simple
