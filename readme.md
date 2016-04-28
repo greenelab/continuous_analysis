@@ -14,7 +14,7 @@ We consider 3 configurations of continuous analysis:
 1. Using a full service continuous integration service.
 	*  Shippable ([Shippable](https://app.shippable.com/))
 	*  wercker ([wercker](http://wercker.com/))
-	*  Many other CI services are docker compatible including [Codeship](https://codeship.com/), [Travis CI](https://travis-ci.org/), [CircleCI](https://circleci.com/) and several others)
+	*  Many other CI services are docker compatible including [Codeship](https://codeship.com/), [Travis CI](https://travis-ci.org/), [CircleCI](https://circleci.com/) and several others
 	
 2. Installing a personal local continuous integration service.
 3. Provisioning a personal continuous integration service in the cloud.
@@ -302,7 +302,7 @@ Homepage URL: http://YOUR-IP-HERE/
 Callback URL: http://YOUR-IP-HERE/authorize/
 ~~~
 
-5.) Create a configuration file at (/etc/drone/dronerc), filling int he client info - 
+5.) Create a configuration file at (/etc/drone/dronerc), filling in the client info - 
 
 ~~~
 REMOTE_DRIVER=github
