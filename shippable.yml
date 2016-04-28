@@ -38,7 +38,6 @@ build:
 
     - git checkout master
     - git pull
-    - git merge --no-ff staging -Xtheirs
     - git add shippable/.
     - git commit -a -m "Shippable output [CI SKIP] [SKIP CI] ."
     - git stash

@@ -25,7 +25,6 @@ script:
   
   - git checkout master
   - git pull
-  - git merge --no-ff staging -Xtheirs
   - git add drone/*
   - git commit drone/* -m "Drone output [CI SKIP] [SKIP CI] ."
   - git stash
