@@ -1,11 +1,11 @@
-<testsuite errors="0" failures="0" name="nose2-junit" skipped="0" tests="3" time="0.003">
-  <testcase classname="test.SimpleTest" name="testAdd" time="0.001828">
+<testsuite errors="0" failures="0" name="nose2-junit" skipped="0" tests="3" time="0.002">
+  <testcase classname="test.SimpleTest" name="testAdd" time="0.001687">
     <system-err />
   </testcase>
-  <testcase classname="test.SimpleTest" name="testMultiply" time="0.000258">
+  <testcase classname="test.SimpleTest" name="testMultiply" time="0.000176">
     <system-err />
   </testcase>
-  <testcase classname="test.SimpleTest" name="testSubtract" time="0.000224">
+  <testcase classname="test.SimpleTest" name="testSubtract" time="0.000151">
     <system-err />
   </testcase>
 </testsuite>
