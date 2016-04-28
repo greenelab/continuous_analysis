@@ -1,7 +1,7 @@
 image: brettbj/continuous_analysis_base:latest
 script:
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
-  - mkdir drone
+  - mkdir -p drone
   - nose2 --plugin nose2.plugins.junitxml --junit-xml test
   - mv nose2-junit.xml drone/tests.xml
   - coverage run --branch test.py
