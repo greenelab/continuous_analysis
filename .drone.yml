@@ -15,7 +15,7 @@ script:
   
   # plot the results from a jupyter notebook
   - cd /var/cache/drone/src/github.com/greenelab/continuous_analysis
-  - jupyter nbconvert --to html --execute ./Plotting.ipynb
+  - jupyter nbconvert --to html --execute ./Drone_Plotting.ipynb
 
   # push the results back to github
   - git config user.email "brettbj@gmail.com"
