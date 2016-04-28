@@ -5,7 +5,7 @@ archive: true
 
 env:
   - secure: bMjk/u1ANHX7uJIPU5ZwKseWuftRdu6rmmUvmf0/dCnb1k3IiHSHP0Wv0ESf9JiNtzRxo1V+nzTpWwDL64hC4cuBHj7sOtBPnBqiDCDuE3mq5tVKDVQSo2og3O+j/0o2PsvFhAP0hzOzM2QXLCtgb6NQTemAEhsNCpMBCKepddpfD7ZN1xRcagZLUTmsBYO9+r95Z10/6pw8PI2wCTa22gSd49+bqMo96NpUEFgyaVZS9Lo+EOlcgS+8aCfbpyXDDL+ls/3TE0FaYTRRtuOCGuHNIItrrnrMmiUFpqCuJaVDVaKbJPK+Wk2EnioJUQPoc6BgI5enqIiJjpV2VEDp5Q==
-  - git_key: git_publish_key
+  
 build:
   pre_ci_boot:
       image_name: brettbj/continuous_analysis_base
@@ -34,7 +34,7 @@ build:
     - git config user.email "brettbj@gmail.com"
     - git config user.name "Brett Beaulieu-Jones"
     - git config --global push.default simple
-    - git remote set-url origin https://brettbj:$git_key@github.com/greenelab/continuous_analysis.git
+    - git remote set-url origin https://brettbj:$git_publish_key@github.com/greenelab/continuous_analysis.git
 
     - git checkout master
     - git add shippable/.
