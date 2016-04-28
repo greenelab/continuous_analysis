@@ -34,7 +34,7 @@ build:
     - git remote set-url origin https://brettbj:$$git_publish_key@github.com/greenelab/continuous_analysis.git
 
     - git checkout master
-    - git add shippable/*
+    - git add shippable/.
     - git commit shippable/* -m "Shippable output [CI SKIP] [SKIP CI] ."
     - git stash
     - git push
