@@ -20,7 +20,9 @@ We consider 3 configurations of continuous analysis:
 3. Provisioning a personal continuous integration service in the cloud.
 	* [Digital Ocean](https://www.digitalocean.com/)
 	* [Amazon Web Services](http://aws.amazon.com/)
-	* [Google Cloud Platform](https://cloud.google.com/)Using a full service continuous integration service requires the least set up time but cannot handle computational intensive work. Local continuous integration can be used at no cost, and configured to take advantage of institutional clusters or GPU computing. Continuous integration in the cloud offers elastic computing resources with the ability to scale up or down depending on the computational complexity of your work.
+	* [Google Cloud Platform](https://cloud.google.com/)
+
+Using a full service continuous integration service requires the least set up time but cannot handle computational intensive work. Local continuous integration can be used at no cost, and configured to take advantage of institutional clusters or GPU computing. Continuous integration in the cloud offers elastic computing resources with the ability to scale up or down depending on the computational complexity of your work.
 
 
 ### Example 1 - Full service - Shippable
@@ -196,7 +198,7 @@ sudo docker pull drone/drone:0.4
 
 ~~~
 Homepage URL: http://YOUR-IP-HERE/
-Callback URL: http://YOUR-IP-HERE/autorize/
+Callback URL: http://YOUR-IP-HERE/authorize/
 ~~~
 
 4.) Create a configuration file at (etc/drone/dronerc), filling in the client 
