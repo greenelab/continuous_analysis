@@ -1,8 +1,8 @@
 # Continuous Analysis
 
-This repository presents Continuous Analysis, a process demonstrating computational reproducibility by producing verfiable end-to-end runs of computational research. 
+This repository presents Continuous Analysis, a process demonstrating computational reproducibility by producing verfiable end-to-end runs of computational research. The process is described in detail at: [Biorxiv Preprint](http://biorxiv.org/content/early/2016/06/01/056473:)
 
-We encourage additions and improvements, please create an issue or better yet, implement it and create a pull request.
+We encourage additions and improvements, please create an issue or better yet, implement it and create a pull request. Please let us know if you run into any difficulty implementing continuous analysis on your own.
 
 This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit. We also use this process with [Denoising Autoencoders for Phenotype Stratification](https://github.com/greenelab/DAPS)
 
@@ -11,12 +11,13 @@ This repository uses a test run of [Kallisto](https://github.com/pachterlab/kall
 
 We consider 3 configurations of continuous analysis:
 
-1. Using a full service continuous integration service.
+1. Installing a personal local continuous integration service.
+
+2. Using a full service continuous integration service.
 	*  Shippable ([Shippable](https://app.shippable.com/))
 	*  wercker ([wercker](http://wercker.com/))
 	*  Many other CI services are docker compatible including [Codeship](https://codeship.com/), [Travis CI](https://travis-ci.org/), [CircleCI](https://circleci.com/) and several others
 	
-2. Installing a personal local continuous integration service.
 3. Provisioning a personal continuous integration service in the cloud.
 	* [Digital Ocean](https://www.digitalocean.com/)
 	* [Amazon Web Services](http://aws.amazon.com/)
@@ -24,8 +25,75 @@ We consider 3 configurations of continuous analysis:
 
 Using a full service continuous integration service requires the least set up time but cannot handle computational intensive work. Local continuous integration can be used at no cost, and configured to take advantage of institutional clusters or GPU computing. Continuous integration in the cloud offers elastic computing resources with the ability to scale up or down depending on the computational complexity of your work.
 
+### .drone.yml Example Configuration
 
-### Example 1 - Full service - Shippable
+Each of the local and cloud implementations uses a common .drone.yml format. See [here](https://github.com/greenelab/continuous_analysis/blob/master/.drone.yml) for a full example.
+
+~~~
+# choose the base docker image
+image: brettbj/continuous_analysis_base
+script:
+	# run tests
+	# perform analysis
+
+# publish results
+publish:
+	docker:
+		# docker details
+~~~
+
+### Example 3 - Local/Private Cluster CI service
+
+[Drone](https://github.com/drone/drone) is a CI platform built on container technology. It can be used to easily run a local or private cluster based CI service. Instructions adapted from - [http://readme.drone.io/setup/overview/](http://readme.drone.io/setup/overview/)
+
+1.) Install Docker on host machine - [Linux](https://docs.docker.com/linux/), [Mac](https://docs.docker.com/mac/), [Windows](https://docs.docker.com/windows/)
+
+2.) Pull the drone image via docker
+
+~~~
+sudo docker pull drone/drone:0.4
+~~~
+
+3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the homepage URL and the authorization callback followed by /authorize/
+
+~~~
+Homepage URL: http://YOUR-IP-HERE/
+Callback URL: http://YOUR-IP-HERE/authorize/
+~~~
+
+<img src=https://github.com/greenelab/continuous_analysis/blob/master/readme_images/register_application.png?raw=true" alt="Drawing"/>
+
+4.) Add a webhook in to notify the continuous integration server of any updates pushed to the repository.
+
+<img src=https://github.com/greenelab/continuous_analysis/blob/master/readme_images/add_webhook.png?raw=true" alt="Drawing"/>
+
+The payload URL should be in the format of your-ip/api/hook/github.com/client-id
+
+5.) Create a configuration file at (etc/drone/dronerc), filling in the client 
+
+~~~
+REMOTE_DRIVER=github
+REMOTE_CONFIG=https://github.com?client_id=....&client_secret=....
+~~~
+
+6.) Create and run your drone container 
+
+~~~
+sudo docker run \
+	--volume /var/lib/drone:/var/lib/drone \
+	--volume /var/run/docker.sock:/var/run/docker.sock \
+	--env-file /etc/drone/dronerc \
+	--restart=always \
+	--publish=80:8000 \
+	--detach=true \
+	--name=drone \
+	drone/drone:0.4
+~~~
+
+6.) Access the drone control panel - your-ip-address/login and press the github button. 
+
+
+### Example 2 - Full service - Shippable
 
 Shippable is the only example shown that does not rely on the [open source drone project](https://github.com/drone/drone)
 
@@ -99,7 +167,7 @@ post_ci:
 
 
 
-### Example 2 - Full service - wercker
+### Example 3 - Full service - wercker
 
 * Pull in docker image
 
@@ -163,66 +231,6 @@ build:
           git push
 ~~~
 
-
-### .drone.yml Example Configuration
-
-Each of the remaining examples uses a common .drone.yml format. See [here](https://github.com/greenelab/continuous_analysis/blob/master/.drone.yml) for full details
-
-~~~
-# choose the base docker image
-image: brettbj/continuous_analysis_base
-script:
-	# run tests
-	# perform analysis
-
-# publish results
-publish:
-	docker:
-		# docker details
-~~~
-
-
-### Example 3 - Local/Private Cluster CI service
-
-[Drone](https://github.com/drone/drone) is a CI platform built on container technology. It can be used to easily run a local or private cluster based CI service. Instructions adapted from - [http://readme.drone.io/setup/overview/](http://readme.drone.io/setup/overview/)
-
-1.) Install Docker on host machine - [Linux](https://docs.docker.com/linux/), [Mac](https://docs.docker.com/mac/), [Windows](https://docs.docker.com/windows/)
-
-2.) Pull the drone image via docker
-
-~~~
-sudo docker pull drone/drone:0.4
-~~~
-
-3.) Create a new application at - https://github.com/settings/developers - with your hosts ip address in the homepage URL and the authorization callback followed by /authorize/
-
-~~~
-Homepage URL: http://YOUR-IP-HERE/
-Callback URL: http://YOUR-IP-HERE/authorize/
-~~~
-
-4.) Create a configuration file at (etc/drone/dronerc), filling in the client 
-
-~~~
-REMOTE_DRIVER=github
-REMOTE_CONFIG=https://github.com?client_id=....&client_secret=....
-~~~
-
-5.) Create and run your drone container 
-
-~~~
-sudo docker run \
-	--volume /var/lib/drone:/var/lib/drone \
-	--volume /var/run/docker.sock:/var/run/docker.sock \
-	--env-file /etc/drone/dronerc \
-	--restart=always \
-	--publish=80:8000 \
-	--detach=true \
-	--name=drone \
-	drone/drone:0.4
-~~~
-
-6.) Access the drone control panel - your-ip-address/login and press the github button. 
 
 ### Example 4 - Private Cloud CI service - Digital Ocean
 
