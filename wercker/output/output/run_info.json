@@ -4,6 +4,6 @@
 	"n_processed": 10000,
 	"kallisto_version": "0.42.5",
 	"index_version": 10,
-	"start_time": "Fri Jul  1 12:34:13 2016",
+	"start_time": "Fri Jul  1 14:08:42 2016",
 	"call": "kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz"
 }
