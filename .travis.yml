@@ -5,9 +5,10 @@ services:
   - docker
 
 before_install:
-  - docker build -t alexwhan/cont_analysis_test .
-  - docker run alexwhan/cont_analysis_test /bin/sh
+  - docker pull brettbj/continuous_analysis_base
+  - docker run brettbj/continuous_analysis_base /bin/sh
 
 script:
+  - ls
   - cd /kallisto/test
   - kallisto index -i transcripts.idx transcripts.fasta.gz
