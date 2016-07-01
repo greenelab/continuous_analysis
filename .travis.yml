@@ -6,7 +6,7 @@ services:
 
 before_install:
   - docker build -t alexwhan/cont_analysis_test .
-  - docker run alexwhan/cont_analysis_test
+  - docker run alexwhan/cont_analysis_test /bin/sh
 
 script:
   - cd /kallisto/test
