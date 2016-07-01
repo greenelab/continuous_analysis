@@ -42,7 +42,7 @@ publish:
 		# docker details
 ~~~
 
-### Example 3 - Local/Private Cluster CI service
+### Example 1 - Local/Private Cluster CI service
 
 [Drone](https://github.com/drone/drone) is a CI platform built on container technology. It can be used to easily run a local or private cluster based CI service. Instructions adapted from - [http://readme.drone.io/setup/overview/](http://readme.drone.io/setup/overview/)
 
