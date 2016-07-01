@@ -212,7 +212,9 @@ build:
           jupyter nbconvert --to html --execute ./Wercker_Plotting.ipynb
 ~~~
 
-* Set an environment variable in Wercker
+* Create a personal access token in github (Personal settings -> Personal access tokens -> generate new token -> give it repo access)
+
+* Set an environment variable in Wercker to push results to github (example used git_publish_key)
 
 * Push results to github
 
