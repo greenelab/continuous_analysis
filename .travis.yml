@@ -6,8 +6,9 @@ services:
 
 before_install:
   - docker pull brettbj/continuous_analysis_base
-  - docker run brettbj/continuous_analysis_base /bin/sh -c "cd /kallisto test"
+  - docker run -it brettbj/continuous_analysis_base
 
 script:
   - ls
+  - cd kallisto/test
   - kallisto index -i transcripts.idx transcripts.fasta.gz
