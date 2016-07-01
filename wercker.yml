@@ -5,7 +5,7 @@ build:
         name: Run Tests + Coverage
         code: |
           nose2 --plugin nose2.plugins.junitxml --junit-xml test 
-          mkdir wercker
+          #mkdir wercker
           mv nose2-junit.xml wercker/tests.xml
           coverage run --branch test.py
           coverage xml -o wercker/coverage.xml test.py
