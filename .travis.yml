@@ -6,3 +6,8 @@ services:
 
 before_install:
   - docker build -t alexwhan/cont_analysis_test .
+  - docker run alexwhan/cont_analysis_test
+
+script:
+  - cd /kallisto/test
+  - kallisto index -i transcripts.idx transcripts.fasta.gz
