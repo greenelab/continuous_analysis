@@ -212,6 +212,8 @@ build:
           jupyter nbconvert --to html --execute ./Wercker_Plotting.ipynb
 ~~~
 
+* Set an environment variable in Wercker
+
 * Push results to github
 
 ~~~yaml
