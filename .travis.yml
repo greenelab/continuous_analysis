@@ -1,0 +1,16 @@
+sudo: required
+
+language: python
+
+services:
+ - docker
+
+ before_install:
+ - docker build -t alexwhan/cont_analysis_test .
+ - docker run alexwhan/cont_analysis_test
+
+ script:
+ - cd /kallisto/test
+ - kallisto index -i transcripts.idx transcripts.fasta.gz
+ - kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
+ - cp -R /kallisto/test/output /root/src/github.com/greenelab/continuous_analysis/shippable/output
