@@ -214,7 +214,7 @@ build:
 
 * Create a personal access token in github (Personal settings -> Personal access tokens -> generate new token -> give it repo access)
 
-* Set an environment variable in Wercker to push results to github (example used git_publish_key)
+* Set an environment variable in Wercker to push results to github. Go to settings, environment variables (example used git_publish_key, the url in wercker.yml is then - https://{TOKEN}@github.com/{ACCOUNT}/{REPOSITORY}.git)
 
 * Push results to github
 
