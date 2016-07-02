@@ -6,7 +6,9 @@ services:
 
 before_install:
   - docker pull brettbj/continuous_analysis_base
+  - docker run --name con_test -t -d brettbj/continuous_analysis_base bin/bash
 
 script:
-  - docker run --name con_test -t -d brettbj/continuous_analysis_base bin/bash
+  - ls
   - docker exec con_test kallisto index -i kallisto/test/transcripts.idx kallisto/test/transcripts.fasta.gz
+  - docker exec con_test kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz
