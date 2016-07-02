@@ -13,6 +13,13 @@ script:
   - ls
   - pwd
   - docker exec con_test pwd
+  - docker exec con_test ls
+
+  #Run tests
+  - docker exec con_test nose2 --plugin nose2.plugins.junitxml --junit-xml continuous_analysis/test
+  - docker exec con_test mv nose2-junit.xml continuous_analysis/travis-ci/tests.xml
+  - docker exec con_test coverage run --branch continuous_analysis/test.py
+  - docker exec con_test coverage xml -o continuous_analysis/travis-ci/coverage.xml continuous_analysis/test.py
   - docker exec con_test kallisto index -i kallisto/test/transcripts.idx kallisto/test/transcripts.fasta.gz
   - docker exec con_test kallisto quant -i kallisto/test/transcripts.idx -o output -b 100 kallisto/test/reads_1.fastq.gz kallisto/test/reads_2.fastq.gz
-  - docker cp con_test:/kallisto/test/output 
+  - docker cp con_test:/kallisto/test/output travis-ci/output
