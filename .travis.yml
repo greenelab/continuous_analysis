@@ -21,6 +21,13 @@ script:
   - docker exec con_test mv nose2-junit.xml travis-ci/tests.xml
   - docker exec con_test coverage run --branch test.py
   - docker exec con_test coverage xml -o travis-ci/coverage.xml test.py
+  
+  #Run kallisto
   - docker exec con_test kallisto index -i kallisto/test/transcripts.idx kallisto/test/transcripts.fasta.gz
   - docker exec con_test kallisto quant -i kallisto/test/transcripts.idx -o output -b 100 kallisto/test/reads_1.fastq.gz kallisto/test/reads_2.fastq.gz
-  - docker cp con_test:/kallisto/test/output travis-ci/output
+  
+  #Gather output
+  - docker exec con_test mv kallisto/test/output travis-ci/output
+
+  #Copy output out of container
+  - docker cp con_test:/travis-ci travis-ci
