@@ -12,6 +12,7 @@ before_install:
 script:
   - ls
   - pwd
+  - docker exec con_test pwd
   - docker exec con_test kallisto index -i kallisto/test/transcripts.idx kallisto/test/transcripts.fasta.gz
   - docker exec con_test kallisto quant -i kallisto/test/transcripts.idx -o output -b 100 kallisto/test/reads_1.fastq.gz kallisto/test/reads_2.fastq.gz
   - docker cp con_test:/kallisto/test/output 
