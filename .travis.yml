@@ -30,7 +30,7 @@ script:
   - docker exec con_test mv kallisto/test/output travis-ci/output
   
   #Plot results from a jupyter notebook
-  - docker exec con_test jupyter nbconvert --too html --execute Travis_Plotting.ipynb
+  - docker exec con_test jupyter nbconvert --to html --execute Travis_Plotting.ipynb
 
   #Copy output out of container
   - docker cp con_test:/travis-ci travis-ci
