@@ -24,7 +24,7 @@ script:
   
   #Run kallisto
   - docker exec con_test kallisto index -i kallisto/test/transcripts.idx kallisto/test/transcripts.fasta.gz
-  - docker exec con_test kallisto quant -i kallisto/test/transcripts.idx -o output -b 100 kallisto/test/reads_1.fastq.gz kallisto/test/reads_2.fastq.gz
+  - docker exec con_test kallisto quant -i kallisto/test/transcripts.idx -o kallisto/test/output -b 100 kallisto/test/reads_1.fastq.gz kallisto/test/reads_2.fastq.gz
   
   #Gather output
   - docker exec con_test mv kallisto/test/output travis-ci/output
