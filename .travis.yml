@@ -9,6 +9,7 @@ before_install:
   - docker run --name con_test -t -d brettbj/continuous_analysis_base bin/bash
   - docker cp test.py con_test:test.py
   - docker cp simple_script.py con_test:simple_script.py
+  - docker cp Travis_Plotting.ipynb con_test:Travis_Plotting.ipynb
   - docker exec con_test mkdir travis-ci
 
 script:
