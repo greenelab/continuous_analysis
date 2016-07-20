@@ -50,4 +50,4 @@ script:
   - git push
   
 after_success:
-      
+  - docker build -t brettbj/continuous_analysis .  
