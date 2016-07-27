@@ -37,10 +37,10 @@ script:
   - docker cp con_test:/travis-ci travis-ci
   
   #Push results back to github
-  - git config user.email "alexwhan@gmail.com"
-  - git config user.name "Alex Whan"
+  - git config user.email "brettbj@gmail.com"
+  - git config user.name "Brett Beaulieu-Jones"
   - git config --global push.default simple
-  - git remote set-url origin https://alexwhan:$git_publish_key@github.com/alexwhan/continuous_analysis.git
+  - git remote set-url origin https://brettbj:$git_publish_key@github.com/greenelab/continuous_analysis.git
   
   - git checkout master
   - git pull
@@ -50,4 +50,5 @@ script:
   - git push
   
 after_success:
-  - docker build -t brettbj/continuous_analysis .  
+  - docker build -t brettbj/continuous_analysis .
+  - docker push brettbj/continuous_analysis:latest
