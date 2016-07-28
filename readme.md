@@ -336,3 +336,10 @@ sudo docker run \
 	--name=drone \
 	drone/drone:0.4
 ~~~
+
+## Feedback
+
+Please feel free to email me - (brettbe) at med.upenn.edu with any feedback or raise a github issue with any comments or questions.
+
+## Acknowledgements
+This work is supported by the Gordon and Betty Moore Foundation's Data-Driven Discovery Initiative through Grant GBMF4552 to C.S.G. as well as the Commonwealth Universal Research Enhancement (CURE) Program grant from the Pennsylvania Department of Health.
