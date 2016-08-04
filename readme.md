@@ -69,7 +69,7 @@ Callback URL: http://YOUR-IP-HERE/authorize/
 
 The payload URL should be in the format of your-ip/api/hook/github.com/client-id
 
-5.) Create a configuration file at (etc/drone/dronerc), filling in the client 
+5.) Create a configuration file at (/etc/drone/dronerc), filling in the client 
 
 ~~~
 REMOTE_DRIVER=github
