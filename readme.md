@@ -1,6 +1,6 @@
 # Continuous Analysis
 
-This repository presents Continuous Analysis, a process demonstrating computational reproducibility by producing verfiable end-to-end runs of computational research. The process is described in detail at: [Biorxiv Preprint](http://biorxiv.org/content/early/2016/06/01/056473:)
+This repository presents Continuous Analysis, a process demonstrating computational reproducibility by producing verfiable end-to-end runs of computational research. The process is described in detail at: [Biorxiv Preprint](http://dx.doi.org/10.1101/056473)
 
 We encourage additions and improvements, please create an issue or better yet, implement it and create a pull request. Please let us know if you run into any difficulty implementing continuous analysis on your own.
 
