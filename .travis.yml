@@ -1,0 +1,54 @@
+language: bash
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull brettbj/continuous_analysis_base
+  - docker run --name con_test -t -d brettbj/continuous_analysis_base bin/bash
+  - docker cp test.py con_test:test.py
+  - docker cp simple_script.py con_test:simple_script.py
+  - docker cp Travis_Plotting.ipynb con_test:Travis_Plotting.ipynb
+  - docker exec con_test mkdir travis-ci
+
+script:
+  - ls
+  - pwd
+  - docker exec con_test pwd
+
+  #Run tests
+  - docker exec con_test nose2 --plugin nose2.plugins.junitxml --junit-xml test
+  - docker exec con_test mv nose2-junit.xml travis-ci/tests.xml
+  - docker exec con_test coverage run --branch test.py
+  - docker exec con_test coverage xml -o travis-ci/coverage.xml test.py
+  
+  #Run kallisto
+  - docker exec con_test kallisto index -i kallisto/test/transcripts.idx kallisto/test/transcripts.fasta.gz
+  - docker exec con_test kallisto quant -i kallisto/test/transcripts.idx -o kallisto/test/output -b 100 kallisto/test/reads_1.fastq.gz kallisto/test/reads_2.fastq.gz
+  
+  #Gather output
+  - docker exec con_test mv kallisto/test/output travis-ci/output
+  
+  #Plot results from a jupyter notebook
+  - docker exec con_test jupyter nbconvert --to html --execute Travis_Plotting.ipynb
+
+  #Copy output out of container
+  - docker cp con_test:/travis-ci travis-ci
+  
+  #Push results back to github
+  - git config user.email "brettbj@gmail.com"
+  - git config user.name "Brett Beaulieu-Jones"
+  - git config --global push.default simple
+  - git remote set-url origin https://brettbj:$git_publish_key@github.com/greenelab/continuous_analysis.git
+  
+  - git checkout master
+  - git pull
+  - git add travis-ci/.
+  - git commit -a -m "Travis-CI output [CI SKIP] [SKIP CI] ."
+  - git stash 
+  - git push
+  
+after_success:
+  - docker build -t brettbj/continuous_analysis .
+  - docker push brettbj/continuous_analysis:latest
