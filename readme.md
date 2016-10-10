@@ -4,7 +4,11 @@ This repository presents Continuous Analysis, a process demonstrating computatio
 
 We encourage additions and improvements, please create an issue or better yet, implement it and create a pull request. Please let us know if you run into any difficulty implementing continuous analysis on your own.
 
-This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit. We also use this process with [Denoising Autoencoders for Phenotype Stratification](https://github.com/greenelab/DAPS)
+This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit. We also use this process with [Denoising Autoencoders for Phenotype Stratification](https://github.com/greenelab/DAPS). Additional examples include:
+
+* [RNA-seq Analysis](https://github.com/greenelab/continuous_analysis_rnaseq)
+* [Phylogenetic Tree Building] (https://github.com/greenelab/continuous_analysis_phylo) 
+* [Microarray Differential Expression Analysis - example from Continuous Analysis Paper](https://github.com/greenelab/continuous_analysis_brainarray)
 
 <img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig1.png?raw=true" alt="Drawing" style="width: 600px;"/>
 <img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig2.png?raw=true" alt="Drawing" style="width: 300px;"/><img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig3.png?raw=true" alt="Drawing" style="width: 300px;"/>
@@ -27,7 +31,7 @@ Using a full service continuous integration service requires the least set up ti
 
 ### .drone.yml Example Configuration
 
-Each of the local and cloud implementations uses a common .drone.yml format. See [here](https://github.com/greenelab/continuous_analysis/blob/master/.drone.yml) for a full example.
+Each of the local and cloud implementations uses a common .drone.yml format. See [here](https://github.com/greenelab/continuous_analysis/blob/master/.drone.yml) for a full example. 
 
 ~~~
 # choose the base docker image
