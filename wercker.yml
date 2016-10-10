@@ -16,21 +16,18 @@ build:
           kallisto index -i transcripts.idx transcripts.fasta.gz &>-
           kallisto quant -i transcripts.idx -o output -b 100 reads_1.fastq.gz reads_2.fastq.gz &>-
           cp -R /kallisto/test/output /pipeline/source/wercker/output
-
     - script:
         name: Plot Results
         code: |
           cd /pipeline/source
           jupyter nbconvert --to html --execute ./Wercker_Plotting.ipynb
-
     - script:
         name: Push Results back to github
         code: |
-          git config user.email "alexwhan@gmail.com"
-          git config user.name "Alex Whan"
+          git config user.email "brettbj@gmail.com"
+          git config user.name "Brett Beaulieu-Jones"
           git config --global push.default simple
-          git remote set-url origin https://alexwhan:$git_publish_key@github.com/alexwhan/continuous_analysis.git
-
+          git remote set-url origin https://brettbj:$git_publish_key@github.com/greenelab/continuous_analysis.git
           git checkout master
           git pull
           git add wercker/.
