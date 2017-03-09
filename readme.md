@@ -6,7 +6,9 @@ We encourage additions and improvements, please create an issue or better yet, i
 
 This repository uses a test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit. We also use this process with [Denoising Autoencoders for Phenotype Stratification](https://github.com/greenelab/DAPS). Additional examples include:
 
-* [RNA-seq Analysis](https://github.com/greenelab/continuous_analysis_rnaseq)
+* RNA-seq Analysis:
+	* Using [Salmon](https://github.com/COMBINE-lab/continuous_analysis_rnaseq) (and Drone v0.5)
+	* Using [Kallisto](https://github.com/greenelab/continuous_analysis_rnaseq)
 * [Phylogenetic Tree Building] (https://github.com/greenelab/continuous_analysis_phylo) 
 * [Microarray Differential Expression Analysis - example from Continuous Analysis Paper](https://github.com/greenelab/continuous_analysis_brainarray)
 
