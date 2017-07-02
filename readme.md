@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-This repository presents [Continuous Analysis](http://greenelab.github.io/continuous_analysis/), a process demonstrating computational reproducibility by producing verifiable end-to-end runs of computational research. The process is described in detail at: [Biorxiv Preprint](http://dx.doi.org/10.1101/056473).
+This repository presents [Continuous Analysis](http://greenelab.github.io/continuous_analysis/), a process demonstrating computational reproducibility by producing verifiable end-to-end runs of computational research. The process is described in detail in: [Nature Biotechnology](http://www.nature.com/nbt/journal/vaop/ncurrent/full/nbt.3780.html) and [Biorxiv Preprint](http://dx.doi.org/10.1101/056473).
 
 We encourage additions and improvements, please create an issue or better yet, implement it and create a pull request. Please let us know if you run into any difficulty implementing continuous analysis on your own.
 
@@ -19,10 +19,11 @@ Examples and real applications of continuous analysis are available:
 
 This repository shows example configurations with a locally hosted [Drone](https://github.com/drone/drone) installation as well as [Shippable](https://app.shippable.com/), [wercker](http://wercker.com/) and [Travis CI](https://travis-ci.org/). It uses a small test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit.
 
-<img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig1.png?raw=true" alt="Drawing" style="width: 600px;"/>
-<img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig2.png?raw=true" alt="Drawing" style="width: 300px;"/>
+![Fig1](https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig1.png?raw=true)
 
-<img src=https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig3.png?raw=true" alt="Drawing" style="width: 300px;"/>
+![Fig2](https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig2.png?raw=true)
+
+![Fig3](https://github.com/greenelab/continuous_analysis/blob/master/drone/output/fig3.png?raw=true)
 
 ## Configuration
 
