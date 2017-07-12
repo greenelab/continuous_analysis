@@ -15,6 +15,8 @@ Examples and real applications of continuous analysis are available:
 	* Using [Kallisto](https://github.com/greenelab/continuous_analysis_rnaseq)
 * [Phylogenetic Tree Building] (https://github.com/greenelab/continuous_analysis_phylo)
 * [Microarray Differential Expression Analysis](https://github.com/greenelab/continuous_analysis_brainarray) - example from Continuous Analysis Paper
+* [EHR Imputation](https://github.com/epistasislab/imputation)
+* [Privacy-preserving generative deep neural networks support clinical data sharing](https://github.com/greenelab/SPRINT_gan)
 * [Denoising Autoencoders for Phenotype Stratification](https://github.com/greenelab/DAPS)
 
 This repository shows example configurations with a locally hosted [Drone](https://github.com/drone/drone) installation as well as [Shippable](https://app.shippable.com/), [wercker](http://wercker.com/) and [Travis CI](https://travis-ci.org/). It uses a small test run of [Kallisto](https://github.com/pachterlab/kallisto) as an example. The figures below are re-generated with each commit.

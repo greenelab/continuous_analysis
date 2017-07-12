@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-This repository presents Continuous Analysis, a process demonstrating computational reproducibility by producing verifiable end-to-end runs of computational research. The process is described in detail at: [Biorxiv Preprint](http://dx.doi.org/10.1101/056473).
+This repository presents Continuous Analysis, a process demonstrating computational reproducibility by producing verifiable end-to-end runs of computational research. The process is described in detail in: [Nature Biotechnology](http://www.nature.com/nbt/journal/vaop/ncurrent/full/nbt.3780.html) and [Biorxiv Preprint](http://dx.doi.org/10.1101/056473).
 
 * [The Problem](#problem)
 * [The Solution](#solution)
@@ -37,6 +37,8 @@ Examples and real applications of continuous analysis are available:
 	* Using [Kallisto](https://github.com/greenelab/continuous_analysis_rnaseq)
 * [Phylogenetic Tree Building](https://github.com/greenelab/continuous_analysis_phylo)
 * [Microarray Differential Expression Analysis](https://github.com/greenelab/continuous_analysis_brainarray) - example from Continuous Analysis Paper
+* [EHR Imputation](https://github.com/epistasislab/imputation)
+* [Privacy-preserving generative deep neural networks support clinical data sharing](https://github.com/greenelab/SPRINT_gan)
 * [Denoising Autoencoders for Phenotype Stratification](https://github.com/greenelab/DAPS)
 
 ## <a name="configuration"></a> Configuration
