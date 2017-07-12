@@ -13,7 +13,7 @@ Examples and real applications of continuous analysis are available:
 * RNA-seq Analysis:
 	* Using [Salmon](https://github.com/COMBINE-lab/continuous_analysis_rnaseq) (and Drone v0.5)
 	* Using [Kallisto](https://github.com/greenelab/continuous_analysis_rnaseq)
-* [Phylogenetic Tree Building] (https://github.com/greenelab/continuous_analysis_phylo)
+* [Phylogenetic Tree Building](https://github.com/greenelab/continuous_analysis_phylo)
 * [Microarray Differential Expression Analysis](https://github.com/greenelab/continuous_analysis_brainarray) - example from Continuous Analysis Paper
 * [EHR Imputation](https://github.com/epistasislab/imputation)
 * [Privacy-preserving generative deep neural networks support clinical data sharing](https://github.com/greenelab/SPRINT_gan)
